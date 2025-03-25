@@ -1,0 +1,23 @@
+### Create Product
+POST http://localhost:3000/products/ HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "Water Bottle",
+    "category": "Home and Garden",
+    "stock": 20,
+    "price" : "priceless"
+
+}
+
+### Update Product
+
+PUT http://localhost:3000/products/67e32b56235689fee719edb9 HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "Water Bottle 2",
+    "category": "Home and Garden",
+    "stock": 20,
+    "price" : 10
+}
