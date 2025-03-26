@@ -21,3 +21,15 @@ Content-Type: application/json
     "stock": 20,
     "price" : 10
 }
+
+### Create User
+POST http://localhost:3000/users/ HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "Jackson Wang",
+    "email": "jacksonwang@gmail.com",
+    "age": 20,
+    "role" : "admin"
+
+}

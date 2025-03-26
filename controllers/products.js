@@ -4,6 +4,7 @@ const Product = require('../models/products');
 const {validationResult} = require('express-validator');
 
 const getAll = async (req, res) =>{
+    // #swagger.tags = ['Product']
     await mongodb.getDatabase().db().collection('products').find().toArray()
     .then((products, err) =>{
         if (products.length === 0) {
@@ -21,6 +22,7 @@ const getAll = async (req, res) =>{
 };
 
 const createProduct = async (req,res) =>{
+    // #swagger.tags = ['Product']
     const errors = validationResult(req);
     if (!errors.isEmpty()){
         return res.status(400).json({errors: errors.array()});
@@ -33,7 +35,7 @@ const createProduct = async (req,res) =>{
     })
     try {
         const response = await mongodb.getDatabase().db().collection('products').insertOne(product);
-        if (response.acknowledge){
+        if (response.acknowledged){
             res.status(201).json({message: 'Created product successfully.', product: product});
         } else {
             res.status(500).json({message: 'Something went wrong while creating product.'});
@@ -44,6 +46,7 @@ const createProduct = async (req,res) =>{
 };
 
 const updateProduct = async (req, res) =>{
+    // #swagger.tags = ['Product']
     const productId = new ObjectId(req.params.id);
     const product = {
         name: req.body.name,
@@ -60,6 +63,7 @@ const updateProduct = async (req, res) =>{
 };
 
 const deleteProduct = async (req, res) =>{
+    // #swagger.tags = ['Product']
     const productId = new ObjectId(req.params.id);
     const response = await mongodb.getDatabase().db().collection('products').deleteOne({_id: productId});
     if (response.deletedCount > 0){
