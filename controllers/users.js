@@ -47,6 +47,10 @@ const createUser = async (req,res) =>{
 
 const updateUser = async (req, res) =>{
     // #swagger.tags = ['User']
+    const errors = validationResult(req);
+        if (!errors.isEmpty()){
+            return res.status(400).json({errors: errors.array()});
+        }
     const userId = new ObjectId(req.params.id);
     const user = {
         name: req.body.name,

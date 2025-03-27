@@ -47,6 +47,10 @@ const createProduct = async (req,res) =>{
 
 const updateProduct = async (req, res) =>{
     // #swagger.tags = ['Product']
+    const errors = validationResult(req);
+    if (!errors.isEmpty()){
+        return res.status(400).json({errors: errors.array()});
+    }
     const productId = new ObjectId(req.params.id);
     const product = {
         name: req.body.name,
