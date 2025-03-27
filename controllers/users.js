@@ -26,23 +26,25 @@ const createUser = async (req,res) =>{
     const errors = validationResult(req);
     if (!errors.isEmpty()){
         return res.status(400).json({errors: errors.array()});
-    }
-    const user = new User ({
-        name: req.body.name,
-        email: req.body.email,
-        age: req.body.age,
-        role: req.body.role
-    })
-    try {
-        const response = await mongodb.getDatabase().db().collection('users').insertOne(user);
-        if (response.acknowledged){
-            res.status(201).json({message: 'Created user successfully.', user: user});
-        } else {
-            res.status(500).json({message: 'Something went wrong while creating user.'});
+    } else {
+        const user = new User ({
+            name: req.body.name,
+            email: req.body.email,
+            age: req.body.age,
+            role: req.body.role
+        })
+        try {
+            const response = await mongodb.getDatabase().db().collection('users').insertOne(user);
+            if (response.acknowledged){
+                res.status(201).json({message: 'Created user successfully.', user: user});
+            } else {
+                res.status(500).json({message: 'Something went wrong while creating user.'});
+            }
+        } catch (error) {
+            res.status(500).json({message: err.message || 'Some error occured while updating user data.'})
         }
-    } catch (error) {
-        res.status(500).json({message: err.message || 'Some error occured while updating user data.'})
     }
+    
 };
 
 const updateUser = async (req, res) =>{
@@ -50,8 +52,8 @@ const updateUser = async (req, res) =>{
     const errors = validationResult(req);
         if (!errors.isEmpty()){
             return res.status(400).json({errors: errors.array()});
-        }
-    const userId = new ObjectId(req.params.id);
+        } else {
+            const userId = new ObjectId(req.params.id);
     const user = {
         name: req.body.name,
         email: req.body.email,
@@ -64,6 +66,8 @@ const updateUser = async (req, res) =>{
         } else {
             res.status(500).json(response.error || 'Something went wron while updating user.');
         }
+        }
+    
 };
 
 const deleteUser = async (req, res) =>{
