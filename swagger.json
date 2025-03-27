@@ -5,7 +5,7 @@
     "description": "Project 2",
     "version": "1.0.0"
   },
-  "host": "localhost:3000",
+  "host": "cse341-4p35.onrender.com",
   "basePath": "/",
   "schemes": [
     "http"
@@ -243,13 +243,13 @@
                 "name": {
                   "example": "any"
                 },
-                "price": {
+                "email": {
                   "example": "any"
                 },
-                "category": {
+                "age": {
                   "example": "any"
                 },
-                "stock": {
+                "role": {
                   "example": "any"
                 }
               }

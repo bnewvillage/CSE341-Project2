@@ -11,6 +11,16 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use(express.json());
 
+app.use((req, res, next)=>{
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader(
+        'Access-Control-Allow-Headers',
+        'Origin, X-Requested-With, Content-Type, Accept, Z-Key'
+    );
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DETELE, OPTIONS');
+    next();
+})
+
 app.use('/',require('./routes'));
 
 mongoDb.initDb((err) =>{
