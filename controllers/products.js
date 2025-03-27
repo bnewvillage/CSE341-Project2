@@ -54,7 +54,7 @@ const updateProduct = async (req, res) =>{
         return res.status(400).json({errors: errors.array()});
     } else {
         const productId = new ObjectId(req.params.id);
-    const product = {
+        const product = {
         name: req.body.name,
         price: req.body.price,
         category: req.body.category,
