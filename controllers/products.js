@@ -35,7 +35,10 @@ const createProduct = async (req,res) =>{
             name: req.body.name,
             price: req.body.price,
             category: req.body.category,
-            stock: req.body.stock
+            stock: req.body.stock,
+            description: req.body.description,
+            brand: req.body.brand,
+            rating: req.body.rating
         })
         try {
             const response = await mongodb.getDatabase().db().collection('products').insertOne(product);
