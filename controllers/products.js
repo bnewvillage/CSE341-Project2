@@ -62,7 +62,10 @@ const updateProduct = async (req, res) =>{
                 name: req.body.name,
                 price: req.body.price,
                 category: req.body.category,
-                stock: req.body.stock
+                stock: req.body.stock,
+                description: req.body.description,
+                brand: req.body.brand,
+                rating: req.body.rating
             };
             const response = await mongodb.getDatabase().db().collection('products').replaceOne({_id: productId}, product);
             if (response.modifiedCount > 0){
@@ -75,6 +78,7 @@ const updateProduct = async (req, res) =>{
         }
     }
 };
+
 
 const deleteProduct = async (req, res) =>{
     // #swagger.tags = ['Product']
