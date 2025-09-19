@@ -1,35 +1,26 @@
-E-Commerce API
-Overview
+# E-Commerce API
+
+## Overview
 A RESTful e-commerce API for managing products and users with MongoDB integration and GitHub OAuth authentication.
 
-Features
-Product Management: Create, read, update, and delete products
+## Features
+- **Product Management**: Create, read, update, and delete products
+- **User Management**: Manage user accounts with different roles
+- **GitHub OAuth**: Secure authentication using GitHub accounts
+- **Input Validation**: Comprehensive validation for all inputs
+- **Swagger Documentation**: Interactive API documentation
+- **MongoDB Integration**: NoSQL database for flexible data storage
 
-User Management: Manage user accounts with different roles
+## Tech Stack
+- **Backend**: Node.js, Express.js
+- **Database**: MongoDB with Mongoose ODM
+- **Authentication**: Passport.js with GitHub OAuth
+- **Validation**: Express-validator
+- **Documentation**: Swagger/OpenAPI
+- **Testing**: REST client files for testing
 
-GitHub OAuth: Secure authentication using GitHub accounts
-
-Input Validation: Comprehensive validation for all inputs
-
-Swagger Documentation: Interactive API documentation
-
-MongoDB Integration: NoSQL database for flexible data storage
-
-Tech Stack
-Backend: Node.js, Express.js
-
-Database: MongoDB with Mongoose ODM
-
-Authentication: Passport.js with GitHub OAuth
-
-Validation: Express-validator
-
-Documentation: Swagger/OpenAPI
-
-Testing: REST client files for testing
-
-Project Structure
-text
+## Project Structure
+```
 ├── controllers/
 │   ├── products.js    # Product CRUD operations
 │   └── users.js       # User management operations
@@ -50,61 +41,61 @@ text
 │   └── user-validation.js    # User validation rules
 ├── server.js          # Main application setup
 └── swagger.js         # Swagger documentation generator
-Installation
-Clone the repository:
+```
 
-bash
+## Installation
+1. Clone the repository:
+```bash
 git clone <repository-url>
 cd project-directory
-Install dependencies:
+```
 
-bash
+2. Install dependencies:
+```bash
 npm install
-Set up environment variables:
-Create a .env file with:
+```
 
-text
+3. Set up environment variables:
+Create a `.env` file with:
+```
 MONGODB_URI=mongodb://localhost:27017/ecommerce
 GITHUB_CLIENT_ID=your_github_client_id
 GITHUB_CLIENT_SECRET=your_github_client_secret
 CALLBACK_URL=your_callback_url
 PORT=3000
-Start the application:
+```
 
-bash
+4. Start the application:
+```bash
 npm start
-API Documentation
-Access interactive Swagger documentation at: http://localhost:3000/api-docs
+```
 
-Authentication
+## API Documentation
+Access interactive Swagger documentation at: `http://localhost:3000/api-docs`
+
+## Authentication
 Uses GitHub OAuth for authentication:
+- Access `/login` to initiate GitHub authentication
+- Protected routes require `isAuthenticated` middleware
 
-Access /login to initiate GitHub authentication
+## API Endpoints
 
-Protected routes require isAuthenticated middleware
+### Products
+- `GET /products` - Get all products (authenticated)
+- `POST /products` - Create a new product (authenticated + validation)
+- `PUT /products/:id` - Update a product (authenticated + validation)
+- `DELETE /products/:id` - Delete a product
 
-API Endpoints
-Products
-GET /products - Get all products (authenticated)
+### Users
+- `GET /users` - Get all users
+- `POST /users` - Create a new user (authenticated + validation)
+- `PUT /users/:id` - Update a user (authenticated + validation)
+- `DELETE /users/:id` - Delete a user (authenticated)
 
-POST /products - Create a new product (authenticated + validation)
+## Data Models
 
-PUT /products/:id - Update a product (authenticated + validation)
-
-DELETE /products/:id - Delete a product
-
-Users
-GET /users - Get all users
-
-POST /users - Create a new user (authenticated + validation)
-
-PUT /users/:id - Update a user (authenticated + validation)
-
-DELETE /users/:id - Delete a user (authenticated)
-
-Data Models
-Product Model
-javascript
+### Product Model
+```javascript
 {
   name: String (required),
   price: Number (required, min: 0),
@@ -115,41 +106,37 @@ javascript
   rating: Boolean,
   color: String
 }
-User Model
-javascript
+```
+
+### User Model
+```javascript
 {
   name: String (required),
   email: String (required),
   age: Number (required),
   role: String (required)
 }
-Validation
+```
+
+## Validation
 The API includes comprehensive validation:
+- Product creation/updates require: name, price, category, stock
+- User creation/updates require: name, email, age, role
+- Email validation ensures proper email format
+- Numeric validation for price, stock, and age fields
 
-Product creation/updates require: name, price, category, stock
+## Testing
+Test endpoints using the included `routes.rest` file or tools like Postman.
 
-User creation/updates require: name, email, age, role
+## Dependencies
+- express, mongodb, mongoose
+- passport, passport-github2
+- express-session, express-validator
+- swagger-ui-express, swagger-autogen
+- dotenv, cors
 
-Email validation ensures proper email format
+## Development
+Generate updated Swagger docs: `node swagger.js`
 
-Numeric validation for price, stock, and age fields
-
-Testing
-Test endpoints using the included routes.rest file or tools like Postman.
-
-Dependencies
-express, mongodb, mongoose
-
-passport, passport-github2
-
-express-session, express-validator
-
-swagger-ui-express, swagger-autogen
-
-dotenv, cors
-
-Development
-Generate updated Swagger docs: node swagger.js
-
-Deployment
+## Deployment
 Configure environment variables for MongoDB and GitHub OAuth credentials. The application is ready for deployment on platforms like Render.
